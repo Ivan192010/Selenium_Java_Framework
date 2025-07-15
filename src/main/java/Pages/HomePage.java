@@ -11,6 +11,9 @@ public class HomePage extends BasePage{
     private By Subscriptions = By.cssSelector("a[href='/feed/subscriptions'][role='link']");
     private By SubsText = By.cssSelector("h1.dynamic-text-view-model-wiz__h1");
 
+    private By BusquedaText = By.cssSelector("input.yt-searchbox-input");
+    private By BusquedaButton = By.cssSelector("button.ytSearchboxComponentSearchButton");
+
     public HomePage(WebDriver driver, int TimeOutInSeconds) {
         super(driver,10);
         this.driver = driver;
@@ -38,4 +41,11 @@ public class HomePage extends BasePage{
         return text;
     }
 
+    public void clickBusqueda() {
+        MakeClick(BusquedaButton,null);
+    }
+
+    public void writeBusqueda(String busqueda) {
+        SendKeys(BusquedaText,busqueda,null);
+    }
 }
