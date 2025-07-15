@@ -4,6 +4,7 @@ import Base.BaseTest;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.Assert;
+import org.openqa.selenium.By;
 
 
 @Epic("Ejercicios Jaime")
@@ -37,9 +38,19 @@ public class MainPage extends BaseTest {
     @Story("Test de Busqueda")
     public void testBusqueda(){
         homePage.openHomePage();
-        homePage.writeBusqueda("MrBeast");
+        homePage.writeBusqueda();
         homePage.clickBusqueda();
-        String URLPage = driver.getCurrentUrl();
-        Assert.assertEquals(URLPage, "https://www.youtube.com/results?search_query=");
-    }
+        boolean isVisible = homePage.IsSearchChannelVisible();
+        Assert.assertTrue(isVisible);
+   }
+
+   @Test(description = "Test de Video")
+   @Severity(SeverityLevel.NORMAL)
+   @Story("Test de Video")
+   public void testVideo(){
+    homePage.openHomePage();
+    homePage.writeBusqueda();
+    homePage.clickBusqueda();
+    homePage.clickFristVideo();
+   }
 }

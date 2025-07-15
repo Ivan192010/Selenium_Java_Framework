@@ -2,6 +2,8 @@ package Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import java.util.List;
 
 public class HomePage extends BasePage{
 
@@ -10,9 +12,13 @@ public class HomePage extends BasePage{
     private By TendencyText = By.cssSelector("h1.dynamic-text-view-model-wiz__h1");
     private By Subscriptions = By.cssSelector("a[href='/feed/subscriptions'][role='link']");
     private By SubsText = By.cssSelector("h1.dynamic-text-view-model-wiz__h1");
-
     private By BusquedaText = By.cssSelector("input.yt-searchbox-input");
     private By BusquedaButton = By.cssSelector("button.ytSearchboxComponentSearchButton");
+    private By SearchChannel = By.cssSelector("a#main-link[href='/@MrBeast']");
+    private By videoContainer = By.cssSelector("ytd-video-renderer #video-title");
+
+
+    private String busqueda = "MrBeast";
 
     public HomePage(WebDriver driver, int TimeOutInSeconds) {
         super(driver,10);
@@ -45,7 +51,21 @@ public class HomePage extends BasePage{
         MakeClick(BusquedaButton,null);
     }
 
-    public void writeBusqueda(String busqueda) {
+    public void writeBusqueda() {
         SendKeys(BusquedaText,busqueda,null);
+    }
+
+    public boolean IsSearchChannelVisible() {
+        return isElementVisible(SearchChannel, null);
+    }
+
+    public void clickFristVideo() {
+        List<WebElement> videos = getElements(videoContainer,null);
+        WebElement FirstVideo = videos.get(0);
+        if (!videos.isEmpty()) {
+            MakeClick(FirstVideo);
+        } else {
+            throw new RuntimeException("No se encontraron videos");
+        }
     }
 }
