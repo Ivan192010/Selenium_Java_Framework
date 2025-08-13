@@ -15,7 +15,7 @@ public class HomePage extends BasePage{
     private By BusquedaText = By.cssSelector("input.yt-searchbox-input");
     private By BusquedaButton = By.cssSelector("button.ytSearchboxComponentSearchButton");
     private By SearchChannel = By.cssSelector("a#main-link[href='/@MrBeast']");
-    private By videoContainer = By.cssSelector("ytd-video-renderer #video-title");
+    private By videoContainer = By.xpath("//a[@id='video-title']/yt-formatted-string[@class='style-scope ytd-video-renderer']");
 
 
     private String busqueda = "MrBeast";
@@ -65,7 +65,7 @@ public class HomePage extends BasePage{
         if (!videos.isEmpty()) {
             MakeClick(FirstVideo);
         } else {
-            throw new RuntimeException("No se encontraron videos");
+            throw new RuntimeException("No videos found");
         }
     }
 }
